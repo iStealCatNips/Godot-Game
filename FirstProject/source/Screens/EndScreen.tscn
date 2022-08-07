@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://source/UserInterface/ChangeSceneButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://source/UserInterface/QuitButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://source/UserInterface/Title.tscn" type="PackedScene" id=3]
+[ext_resource path="res://source/UserInterface/PlayButton.gd" type="Script" id=4]
+[ext_resource path="res://assets/ui_theme.tres" type="Theme" id=5]
+[ext_resource path="res://assets/background.png" type="Texture" id=6]
+[ext_resource path="res://source/UserInterface/QuitButton.gd" type="Script" id=7]
+
+[node name="EndScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 5 )
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+expand = true
+
+[node name="Title" parent="." instance=ExtResource( 3 )]
+anchor_bottom = 0.0
+margin_left = -416.0
+margin_top = 218.0
+margin_right = 416.0
+margin_bottom = 266.0
+text = "Congratulations, you finished the game!"
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -170.0
+margin_top = 794.0
+margin_right = 206.0
+margin_bottom = 893.0
+text = "Final score %s
+You died %s times"
+
+[node name="Menu" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -161.0
+margin_top = -83.5
+margin_right = 161.0
+margin_bottom = 83.5
+rect_scale = Vector2( 1.07322, 1 )
+
+[node name="PlayButton" type="Button" parent="Menu" instance=ExtResource( 1 )]
+margin_right = 322.0
+margin_bottom = 81.0
+size_flags_vertical = 3
+text = "Play Again"
+script = ExtResource( 4 )
+next_scene_path = "res://source/Screens/MainScreen.tscn"
+
+[node name="QuitButton" type="Button" parent="Menu" instance=ExtResource( 2 )]
+margin_top = 85.0
+margin_right = 322.0
+margin_bottom = 167.0
+size_flags_vertical = 3
+text = "Quit"
+script = ExtResource( 7 )
+
+[connection signal="button_down" from="Menu/PlayButton" to="Menu/PlayButton" method="_on_button_up"]
+[connection signal="button_up" from="Menu/QuitButton" to="Menu/QuitButton" method="_on_button_up"]
